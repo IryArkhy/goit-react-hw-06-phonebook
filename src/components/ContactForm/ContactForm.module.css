@@ -1,0 +1,33 @@
+.Form {
+  padding: 50px 50px 0 50px;
+  margin: 0 0 40px 0;
+  border-radius: 30px;
+  width: 35%;
+  border: 3px solid rgb(27, 81, 180);
+}
+
+label {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 200px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid grey;
+  margin-bottom: 40px;
+}
+
+.Form_button {
+  margin-left: 100px;
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+  background-color: rgb(27, 81, 180);
+  color: white;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+}

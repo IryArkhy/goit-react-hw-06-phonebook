@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
 import shortid from 'shortid';
 import T from 'prop-types';
-// import { connect } from 'react-redux';
-// import * as contactActions from '../../redux/contacts/contactsActions';
+import styles from './ContactForm.module.css';
 
 export default function ContactForm({ onSave }) {
   const [name, setName] = useState('');
@@ -27,8 +26,8 @@ export default function ContactForm({ onSave }) {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <label>Name:d</label>
+    <form onSubmit={onSubmit} className={styles.Form}>
+      <label>Name:</label>
       <input
         type="text"
         name="name"
@@ -37,6 +36,7 @@ export default function ContactForm({ onSave }) {
         id={nameId.current}
       />
       <label>Phone number: </label>
+
       <input
         type="text"
         name="number"
@@ -44,7 +44,9 @@ export default function ContactForm({ onSave }) {
         onChange={onChangeNumber}
         id={numberId.current}
       />
-      <button type="submit">Save contact</button>
+      <button type="submit" className={styles.Form_button}>
+        Save contact
+      </button>
     </form>
   );
 }

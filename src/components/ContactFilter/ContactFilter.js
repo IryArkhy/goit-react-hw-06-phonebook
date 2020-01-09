@@ -1,11 +1,17 @@
 import React from 'react';
 import T from 'prop-types';
+import styles from './ContactFilter.module.css';
 
 const ContactFilter = ({ value, onChange }) => (
-  <label>
-    Filter contacts
-    <input type="text" value={value} onChange={onChange} />
-  </label>
+  <>
+    <label className={styles.Label}>Filter contacts</label>
+    <input
+      type="text"
+      value={value}
+      onChange={onChange}
+      className={styles.Input}
+    />
+  </>
 );
 
 ContactFilter.propTypes = {

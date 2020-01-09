@@ -1,9 +1,20 @@
 import React, { useState, useEffect, useReducer, useMemo } from 'react';
 import shortid from 'shortid';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import localStorage from '../../localStorage';
-import ContactForm from './ContactForm';
-import ContactFilter from './ContactFilter';
-import ContactList from './ContactList';
+import ContactForm from '../ContactForm';
+import ContactFilter from '../ContactFilter';
+import ContactList from '../ContactList';
+import styles from './App.module.css';
+
+toast.configure();
+
+const Message = {
+  NOT_COMPLETE_DATA: 'Please, enter needed information!',
+  REPETED_NAME: 'This name already exists in your phonebook',
+  SUCCESSFULL: 'Success!',
+};
 
 const phoneBookReducer = (state = [], { type, payload }) => {
   switch (type) {
@@ -36,7 +47,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    localStorage.saveLocalStorage('contacts', contacts);
+    localStorage.saveToLocalStorage('contacts', contacts);
   }, [contacts]);
 
   const addContact = ({ name, number }) => {
@@ -45,6 +56,16 @@ export default function App() {
       name,
       number,
     };
+    if (!contact.name || !contact.number) {
+      toast.error(Message.NOT_COMPLETE_DATA);
+      return;
+    }
+    const isNameUnique = contacts.find(user => user.name === contact.name);
+
+    if (isNameUnique) {
+      toast.warn(Message.REPETED_NAME);
+      return;
+    }
 
     dispatch({
       type: 'ADD_CONTACT',
@@ -52,18 +73,7 @@ export default function App() {
         contact,
       },
     });
-
-    if (!contact.name || !contact.number) {
-      alert('Please input name and number');
-      return;
-    }
-
-    const findUniqueName = contacts.find(user => user.name === contact.name);
-
-    if (findUniqueName) {
-      alert(`${contact.name} is alredy in contacts`);
-      return;
-    }
+    toast.success(Message.SUCCESSFULL);
   };
 
   const removeContact = id => {
@@ -86,12 +96,14 @@ export default function App() {
   }, [contacts, filter]);
 
   return (
-    <div className="App">
+    <div className={styles.App}>
       <h1>Phonebook</h1>
-      <ContactForm onSave={addContact} />
-      <h2>Contacts</h2>
-      <ContactFilter value={filter} onChange={onChangeFilter} />
-      <ContactList contacts={contactsFilter} removeContact={removeContact} />
+      <main>
+        <ContactForm onSave={addContact} />
+        <h2>Contacts</h2>
+        <ContactFilter value={filter} onChange={onChangeFilter} />
+        <ContactList contacts={contactsFilter} removeContact={removeContact} />
+      </main>
     </div>
   );
 }

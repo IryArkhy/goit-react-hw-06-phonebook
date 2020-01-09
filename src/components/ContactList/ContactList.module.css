@@ -1,0 +1,34 @@
+.List {
+  list-style: none;
+  padding: 20px;
+  border: 3px solid rgb(27, 81, 180);
+  border-radius: 30px;
+  width: 35%;
+  margin: auto;
+}
+
+/* .List_number {
+  display: inline;
+  margin: 0 50px 0 0;
+} */
+
+.List_item {
+  margin-bottom: 20px;
+  border-bottom: 2px dashed rgb(20, 69, 161);
+  padding: 10px;
+}
+
+.List_item > p > span {
+  font-weight: bold;
+}
+
+.Button {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(27, 81, 180);
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+}
